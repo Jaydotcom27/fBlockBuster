@@ -1,0 +1,80 @@
+﻿@model fBlockBuster.Models.tblTransaccion
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tblTransaccion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duracion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblArticulo.Miniatura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblArticulo.Miniatura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblEstado.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblEstado.Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblTipo.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblTipo.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblUsuario.NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblUsuario.NombreUsuario)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -120,9 +128,58 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\tblArticuloDetallesController.cs" />
+    <Compile Include="Controllers\tblArticulosController.cs" />
+    <Compile Include="Controllers\tblEstadosController.cs" />
+    <Compile Include="Controllers\tblGenerosController.cs" />
+    <Compile Include="Controllers\tblRatingsController.cs" />
+    <Compile Include="Controllers\tblTiposController.cs" />
+    <Compile Include="Controllers\tblTransaccionesController.cs" />
+    <Compile Include="Controllers\tblUsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\BaseDatosModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseDatosModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BaseDatosModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseDatosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BaseDatosModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseDatosModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblArticulo.cs">
+      <DependentUpon>BaseDatosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblArticuloDetalle.cs">
+      <DependentUpon>BaseDatosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblEstado.cs">
+      <DependentUpon>BaseDatosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblGenero.cs">
+      <DependentUpon>BaseDatosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblRating.cs">
+      <DependentUpon>BaseDatosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblTipo.cs">
+      <DependentUpon>BaseDatosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblTransaccion.cs">
+      <DependentUpon>BaseDatosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblUsuario.cs">
+      <DependentUpon>BaseDatosModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -132,11 +189,35 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\b11.png" />
+    <Content Include="Models\BaseDatosModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BaseDatosModel.Context.cs</LastGenOutput>
+      <DependentUpon>BaseDatosModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\BaseDatosModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BaseDatosModel.edmx</DependentUpon>
+      <LastGenOutput>BaseDatosModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\BaseDatosModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BaseDatosModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\BaseDatosModel.edmx.diagram">
+      <DependentUpon>BaseDatosModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -148,6 +229,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Styles\font-awesome.min.css" />
+    <Content Include="Styles\style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -162,10 +245,55 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\tblEstados\Create.cshtml" />
+    <Content Include="Views\tblEstados\Delete.cshtml" />
+    <Content Include="Views\tblEstados\Details.cshtml" />
+    <Content Include="Views\tblEstados\Edit.cshtml" />
+    <Content Include="Views\tblEstados\Index.cshtml" />
+    <Content Include="Views\tblRatings\Create.cshtml" />
+    <Content Include="Views\tblRatings\Delete.cshtml" />
+    <Content Include="Views\tblRatings\Details.cshtml" />
+    <Content Include="Views\tblRatings\Edit.cshtml" />
+    <Content Include="Views\tblRatings\Index.cshtml" />
+    <Content Include="Views\tblTipos\Create.cshtml" />
+    <Content Include="Views\tblTipos\Delete.cshtml" />
+    <Content Include="Views\tblTipos\Details.cshtml" />
+    <Content Include="Views\tblTipos\Edit.cshtml" />
+    <Content Include="Views\tblTipos\Index.cshtml" />
+    <Content Include="Views\tblArticuloDetalles\Create.cshtml" />
+    <Content Include="Views\tblArticuloDetalles\Delete.cshtml" />
+    <Content Include="Views\tblArticuloDetalles\Details.cshtml" />
+    <Content Include="Views\tblArticuloDetalles\Edit.cshtml" />
+    <Content Include="Views\tblArticuloDetalles\Index.cshtml" />
+    <Content Include="Views\tblGeneros\Create.cshtml" />
+    <Content Include="Views\tblGeneros\Delete.cshtml" />
+    <Content Include="Views\tblGeneros\Details.cshtml" />
+    <Content Include="Views\tblGeneros\Edit.cshtml" />
+    <Content Include="Views\tblGeneros\Index.cshtml" />
+    <Content Include="Views\tblArticulos\Create.cshtml" />
+    <Content Include="Views\tblArticulos\Delete.cshtml" />
+    <Content Include="Views\tblArticulos\Details.cshtml" />
+    <Content Include="Views\tblArticulos\Edit.cshtml" />
+    <Content Include="Views\tblArticulos\Index.cshtml" />
+    <Content Include="Views\tblUsuarios\Create.cshtml" />
+    <Content Include="Views\tblUsuarios\Delete.cshtml" />
+    <Content Include="Views\tblUsuarios\Details.cshtml" />
+    <Content Include="Views\tblUsuarios\Edit.cshtml" />
+    <Content Include="Views\tblUsuarios\Index.cshtml" />
+    <Content Include="Views\tblTransacciones\Create.cshtml" />
+    <Content Include="Views\tblTransacciones\Delete.cshtml" />
+    <Content Include="Views\tblTransacciones\Details.cshtml" />
+    <Content Include="Views\tblTransacciones\Edit.cshtml" />
+    <Content Include="Views\tblTransacciones\Index.cshtml" />
+    <Content Include="Views\LoginView.cshtml" />
+    <Content Include="Views\Account.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\_LayoutPage1.cshtml" />
+    <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -179,6 +307,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

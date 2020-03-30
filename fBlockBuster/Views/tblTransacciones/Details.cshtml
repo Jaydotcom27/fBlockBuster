@@ -1,0 +1,74 @@
+﻿@model fBlockBuster.Models.tblTransaccion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tblTransaccion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duracion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblArticulo.Miniatura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblArticulo.Miniatura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblEstado.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblEstado.Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblTipo.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblTipo.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblUsuario.NombreUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblUsuario.NombreUsuario)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idTransaccion }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

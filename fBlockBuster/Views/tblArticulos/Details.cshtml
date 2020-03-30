@@ -1,0 +1,90 @@
+﻿@model fBlockBuster.Models.tblArticulo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tblArticulo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Miniatura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Miniatura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duracion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Temporadas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Temporadas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Episodios)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Episodios)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblArticuloDetalle.Productor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblArticuloDetalle.Productor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblGenero.Genero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblGenero.Genero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblTipo.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblTipo.Descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idArticulo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

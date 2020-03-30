@@ -1,0 +1,69 @@
+﻿@model IEnumerable<fBlockBuster.Models.tblTransaccion>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duracion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblArticulo.Miniatura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblEstado.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblTipo.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblUsuario.NombreUsuario)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Precio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Duracion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblArticulo.Miniatura)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblEstado.Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblTipo.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblUsuario.NombreUsuario)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idTransaccion }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idTransaccion }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idTransaccion })
+        </td>
+    </tr>
+}
+
+</table>
