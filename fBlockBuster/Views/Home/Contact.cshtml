@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Contact";
-    if (ViewBag.Tipo == 10)
+    if (Convert.ToInt32(Session["Tipo"]) == 1)
     {
         Layout = "~/Views/Shared/Admin.cshtml";
     }

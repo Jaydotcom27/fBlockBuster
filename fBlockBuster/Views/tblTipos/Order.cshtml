@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<fBlockBuster.Models.tblTipo>
-
 @{
     ViewBag.Title = "Index";
 }
@@ -10,9 +9,8 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
+<button type="button" onclick="location.href='@Url.Action("Index","TblTipos")'">Order</button>
 
-
-<button type="button" onclick="location.href='@Url.Action("Order","TblTipos")'">Order</button>
 
 <table class="table">
     <tr>

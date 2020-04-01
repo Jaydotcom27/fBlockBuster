@@ -86,6 +86,7 @@ namespace fBlockBuster.Controllers
             if (ModelState.IsValid)
             {
                 db.Database.ExecuteSqlCommand("UPDATE tblEstado SET  idGenero = @idGenero, Genero = @Genero",
+                    new SqlParameter("idGenero", tblGenero.idGenero),
                     new SqlParameter("Genero", tblGenero.Genero)
                     );
                 return RedirectToAction("Index");

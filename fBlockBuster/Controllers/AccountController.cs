@@ -48,7 +48,7 @@ namespace fBlockBuster.Controllers
             {
                 bool isAdmin = false;
                 int Tipo = Convert.ToInt32(reader.GetSqlInt32(reader.GetOrdinal("idTipo")).Value);
-                if (Tipo == 10)
+                if (Tipo == 1)
                 {
                     isAdmin = true;
                 }
@@ -56,13 +56,14 @@ namespace fBlockBuster.Controllers
                 if (isAdmin)
                 {
                     con.Close();
-                    ViewBag.Tipo = Tipo;
+                    Session["Tipo"] = Tipo;
                     return View($"~/Views/Home/Index.cshtml");
                 }
                 else
                 {
-                   con.Close();
-                   return View($"~/Views/Home/Index.cshtml");
+                    con.Close();
+                    Session["Tipo"] = Tipo;
+                    return View($"~/Views/Home/Index.cshtml");
                    }
             }
             else

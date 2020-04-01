@@ -18,8 +18,27 @@ namespace fBlockBuster.Controllers
         // GET: tblTipos
         public ActionResult Index()
         {
-            return View(db.tblTipo.SqlQuery("Select * from TblTipo"));
+            int caseSwitch = 1;
+            switch (caseSwitch)
+            {
+                case 1:
+                    return View(db.tblTipo.SqlQuery("Select * from TblTipo Order By TipoTipo ASC"));
+                case 2:
+                    return View(db.tblTipo.SqlQuery("Select * from TblTipo Order By TipoTipo DESC"));
+                default:
+                    break;
+            }
+            return View(db.tblTipo.SqlQuery("Select * from TblTipo Order By TipoTipo ASC"));
         }
+
+        [AllowAnonymous]
+        public ActionResult Order()
+        {
+            return View(db.tblTipo.SqlQuery("Select * from TblTipo Order By TipoTipo DESC"));
+        }
+
+
+
 
         // GET: tblTipos/Details/5
         public ActionResult Details(int? id)

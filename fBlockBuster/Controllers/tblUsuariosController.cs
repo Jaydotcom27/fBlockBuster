@@ -58,7 +58,7 @@ namespace fBlockBuster.Controllers
                     new SqlParameter("NombreUsuario", tblUsuario.NombreUsuario),
                     new SqlParameter("Correo", tblUsuario.Correo),
                     new SqlParameter("PasswordUsuario", tblUsuario.PasswordUsuario),
-                    new SqlParameter("CreadoEn", tblUsuario.CreadoEn)
+                    new SqlParameter("CreadoEn", DateTime.Now)
                     );
                 return RedirectToAction("Index");
             }
@@ -102,7 +102,7 @@ namespace fBlockBuster.Controllers
                 new SqlParameter("NombreUsuario", tblUsuario.NombreUsuario),
                 new SqlParameter("Correo", tblUsuario.Correo),
                 new SqlParameter("PasswordUsuario", tblUsuario.PasswordUsuario),
-                new SqlParameter("CreadoEn", tblUsuario.CreadoEn),
+                new SqlParameter("CreadoEn", DateTime.Now),
                 new SqlParameter("idUsuario", tblUsuario.idUsuario)
                 );
 

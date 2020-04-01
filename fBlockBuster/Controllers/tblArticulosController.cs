@@ -19,7 +19,18 @@ namespace fBlockBuster.Controllers
         public ActionResult Index()
         {
             var tblArticulo = db.tblArticulo.Include(t => t.tblArticuloDetalle).Include(t => t.tblGenero).Include(t => t.tblTipo);
-            return View(tblArticulo.ToList());
+            //return View(tblArticulo.ToList());
+            return View(db.tblArticulo.SqlQuery("SELECT * from TblArticulo WHERE idTipo = 3")); //Solo peliculas
+
+        }
+
+        [AllowAnonymous]
+        public ActionResult Series()
+        {
+            var tblArticulo = db.tblArticulo.Include(t => t.tblArticuloDetalle).Include(t => t.tblGenero).Include(t => t.tblTipo);
+            //return View(tblArticulo.ToList());
+            return View(db.tblArticulo.SqlQuery("SELECT * from TblArticulo WHERE idTipo = 4")); //Solo Series
+
         }
 
         // GET: tblArticulos/Details/5
@@ -102,8 +113,17 @@ namespace fBlockBuster.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Database.ExecuteSqlCommand("UPDATE tblArticulo SET idTipo = @idTipo, idGenero = @idGenero, Miniatura = @Miniatura, " +
-                    "Nombre = @Nombre,Descripcion = @Descripcion, Duracion = @Duracion,@Temporadas, Episodios = @Episodios WHERE idArticulo = @idArticulo",
+                db.Database.ExecuteSqlCommand("UPDATE tblArticulo " +
+                    "SET idTipo = @idTipo, " +
+                    "idGenero = @idGenero, " +
+                    "Miniatura = @Miniatura, " +
+                    "Nombre = @Nombre," +
+                    "Descripcion = @Descripcion, " +
+                    "Duracion = @Duracion," +
+                    "Temporadas = @Temporadas, " +
+                    "Episodios = @Episodios " +
+                    "WHERE idArticulo = @idArticulo",
+
                     new SqlParameter("idTipo", tblArticulo.idTipo),
                     new SqlParameter("idGenero", tblArticulo.idGenero),
                     new SqlParameter("Miniatura", tblArticulo.Miniatura),
