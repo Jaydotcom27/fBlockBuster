@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0661f811d2814d6192bcf162a7c54f84" Name="Diagram1">
-        <EntityTypeShape EntityType="BlockBusterDBModel.tblArticulo" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlockBusterDBModel.tblArticulo" Width="1.5" PointX="3.625" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BlockBusterDBModel.tblArticuloDetalle" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BlockBusterDBModel.tblEstado" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlockBusterDBModel.tblEstado" Width="1.5" PointX="4" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BlockBusterDBModel.tblGenero" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BlockBusterDBModel.tblRating" Width="1.5" PointX="1.5" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BlockBusterDBModel.tblTipo" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BlockBusterDBModel.tblTransaccion" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlockBusterDBModel.tblTransaccion" Width="1.5" PointX="7.375" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BlockBusterDBModel.tblUsuario" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
         <AssociationConnector Association="BlockBusterDBModel.FK__tblArticu__idArt__4222D4EF" ManuallyRouted="false" />
         <AssociationConnector Association="BlockBusterDBModel.FK__tblArticu__idGen__440B1D61" ManuallyRouted="false" />
