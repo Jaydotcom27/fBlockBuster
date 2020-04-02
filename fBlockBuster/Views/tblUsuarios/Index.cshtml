@@ -4,6 +4,16 @@
     ViewBag.Title = "Index";
 }
 
+
+@{
+
+    if (Convert.ToInt32(Session["Tipo"]) == 1)
+    {
+        Layout = "~/Views/Shared/Admin.cshtml";
+
+    }
+}
+
 <h2>Index</h2>
 
 <p>
@@ -29,29 +39,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NombreUsuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Correo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PasswordUsuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreadoEn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblTipo.Descripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idUsuario }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idUsuario }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idUsuario })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Correo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PasswordUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreadoEn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblTipo.Descripcion)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idUsuario }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idUsuario }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idUsuario })
+            </td>
+        </tr>
+    }
 
 </table>

@@ -19,18 +19,77 @@ namespace fBlockBuster.Controllers
         public ActionResult Index()
         {
             var tblArticulo = db.tblArticulo.Include(t => t.tblArticuloDetalle).Include(t => t.tblGenero).Include(t => t.tblTipo);
-            //return View(tblArticulo.ToList());
             return View(db.tblArticulo.SqlQuery("SELECT * from TblArticulo WHERE idTipo = 3")); //Solo peliculas
-
         }
 
-        [AllowAnonymous]
         public ActionResult Series()
         {
             var tblArticulo = db.tblArticulo.Include(t => t.tblArticuloDetalle).Include(t => t.tblGenero).Include(t => t.tblTipo);
-            //return View(tblArticulo.ToList());
             return View(db.tblArticulo.SqlQuery("SELECT * from TblArticulo WHERE idTipo = 4")); //Solo Series
+        }
 
+        public ActionResult sGenero()
+        {
+            var tblArticulo = db.tblArticulo.Include(t => t.tblArticuloDetalle).Include(t => t.tblGenero).Include(t => t.tblTipo);
+            return View(db.tblArticulo.SqlQuery("SELECT A.idArticulo, A.idArticuloDetalle, A.idTipo, A.idGenero, A.Miniatura, A.Nombre, A.Descripcion, A.Duracion, A.Temporadas, A.Episodios, A.Precio " +
+                "FROM tblGenero AS G INNER JOIN tblArticulo AS A ON G.idGenero = A.idGenero " +
+                "INNER JOIN tblArticuloDetalle AS AD ON A.idArticuloDetalle = AD.idArticuloDetalle WHERE idTipo = 3 ORDER BY Genero ASC")); 
+        }
+
+        public ActionResult sDuracion()
+        {
+            var tblArticulo = db.tblArticulo.Include(t => t.tblArticuloDetalle).Include(t => t.tblGenero).Include(t => t.tblTipo);
+            return View(db.tblArticulo.SqlQuery("SELECT A.idArticulo, A.idArticuloDetalle, A.idTipo, A.idGenero, A.Miniatura, A.Nombre, A.Descripcion, A.Duracion, A.Temporadas, A.Episodios, A.Precio " +
+                "FROM tblGenero AS G INNER JOIN tblArticulo AS A ON G.idGenero = A.idGenero INNER JOIN tblArticuloDetalle AS AD ON A.idArticuloDetalle = AD.idArticuloDetalle WHERE idTipo = 3 " +
+                "ORDER BY Duracion ASC")); 
+        }
+
+        public ActionResult sNombre()
+        {
+            var tblArticulo = db.tblArticulo.Include(t => t.tblArticuloDetalle).Include(t => t.tblGenero).Include(t => t.tblTipo);
+            return View(db.tblArticulo.SqlQuery("	SELECT  A.idArticulo, A.idArticuloDetalle, A.idTipo, A.idGenero, A.Miniatura, A.Nombre, A.Descripcion, A.Duracion, A.Temporadas, A.Episodios, A.Precio " +
+                "FROM tblGenero AS G INNER JOIN tblArticulo AS A ON G.idGenero = A.idGenero INNER JOIN tblArticuloDetalle AS AD ON A.idArticuloDetalle = AD.idArticuloDetalle " +
+                "WHERE idTipo = 3 ORDER BY Nombre ASC"));
+        }
+
+        public ActionResult sPrecio()
+        {
+            var tblArticulo = db.tblArticulo.Include(t => t.tblArticuloDetalle).Include(t => t.tblGenero).Include(t => t.tblTipo);
+            return View(db.tblArticulo.SqlQuery("	SELECT  A.idArticulo, A.idArticuloDetalle, A.idTipo, A.idGenero, A.Miniatura, A.Nombre, A.Descripcion, A.Duracion, A.Temporadas, A.Episodios, A.Precio " +
+                "FROM tblGenero AS G INNER JOIN tblArticulo AS A ON G.idGenero = A.idGenero INNER JOIN tblArticuloDetalle AS AD ON A.idArticuloDetalle = AD.idArticuloDetalle " +
+                "WHERE idTipo = 3 ORDER BY Precio ASC"));
+        }
+
+        public ActionResult Genero()
+        {
+            var tblArticulo = db.tblArticulo.Include(t => t.tblArticuloDetalle).Include(t => t.tblGenero).Include(t => t.tblTipo);
+            return View(db.tblArticulo.SqlQuery("SELECT A.idArticulo, A.idArticuloDetalle, A.idTipo, A.idGenero, A.Miniatura, A.Nombre, A.Descripcion, A.Duracion, A.Temporadas, A.Episodios, A.Precio " +
+                "FROM tblGenero AS G INNER JOIN tblArticulo AS A ON G.idGenero = A.idGenero " +
+                "INNER JOIN tblArticuloDetalle AS AD ON A.idArticuloDetalle = AD.idArticuloDetalle WHERE idTipo = 4 ORDER BY Genero ASC"));
+        }
+
+        public ActionResult Duracion()
+        {
+            var tblArticulo = db.tblArticulo.Include(t => t.tblArticuloDetalle).Include(t => t.tblGenero).Include(t => t.tblTipo);
+            return View(db.tblArticulo.SqlQuery("SELECT A.idArticulo, A.idArticuloDetalle, A.idTipo, A.idGenero, A.Miniatura, A.Nombre, A.Descripcion, A.Duracion, A.Temporadas, A.Episodios, A.Precio " +
+                "FROM tblGenero AS G INNER JOIN tblArticulo AS A ON G.idGenero = A.idGenero INNER JOIN tblArticuloDetalle AS AD ON A.idArticuloDetalle = AD.idArticuloDetalle WHERE idTipo = 4 " +
+                "ORDER BY Duracion ASC"));
+        }
+
+        public ActionResult Nombre()
+        {
+            var tblArticulo = db.tblArticulo.Include(t => t.tblArticuloDetalle).Include(t => t.tblGenero).Include(t => t.tblTipo);
+            return View(db.tblArticulo.SqlQuery("	SELECT  A.idArticulo, A.idArticuloDetalle, A.idTipo, A.idGenero, A.Miniatura, A.Nombre, A.Descripcion, A.Duracion, A.Temporadas, A.Episodios, A.Precio " +
+                "FROM tblGenero AS G INNER JOIN tblArticulo AS A ON G.idGenero = A.idGenero INNER JOIN tblArticuloDetalle AS AD ON A.idArticuloDetalle = AD.idArticuloDetalle " +
+                "WHERE idTipo = 4 ORDER BY Nombre ASC"));
+        }
+
+        public ActionResult Precio()
+        {
+            var tblArticulo = db.tblArticulo.Include(t => t.tblArticuloDetalle).Include(t => t.tblGenero).Include(t => t.tblTipo);
+            return View(db.tblArticulo.SqlQuery("	SELECT  A.idArticulo, A.idArticuloDetalle, A.idTipo, A.idGenero, A.Miniatura, A.Nombre, A.Descripcion, A.Duracion, A.Temporadas, A.Episodios, A.Precio " +
+                "FROM tblGenero AS G INNER JOIN tblArticulo AS A ON G.idGenero = A.idGenero INNER JOIN tblArticuloDetalle AS AD ON A.idArticuloDetalle = AD.idArticuloDetalle " +
+                "WHERE idTipo = 4 ORDER BY Precio ASC"));
         }
 
         public ActionResult Agregar(int? id)

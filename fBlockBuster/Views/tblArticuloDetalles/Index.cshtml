@@ -4,6 +4,14 @@
     ViewBag.Title = "Index";
 }
 
+@{
+
+    if (Convert.ToInt32(Session["Tipo"]) == 1)
+    {
+        Layout = "~/Views/Shared/Admin.cshtml";
+
+    }
+}
 <h2>Index</h2>
 
 <p>
@@ -41,41 +49,42 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Productor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Director)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estudio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Formato)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Idioma)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Subtitulos)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nota)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Año)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblRating.Rating)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idArticuloDetalle }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idArticuloDetalle }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idArticuloDetalle })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Productor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Director)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estudio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Formato)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Idioma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subtitulos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nota)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Año)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblRating.Rating)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idArticuloDetalle }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idArticuloDetalle }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idArticuloDetalle })
+            </td>
+        </tr>
+    }
 
 </table>

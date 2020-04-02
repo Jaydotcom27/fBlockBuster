@@ -4,6 +4,16 @@
     ViewBag.Title = "Index";
 }
 
+
+@{
+
+    if (Convert.ToInt32(Session["Tipo"]) == 1)
+    {
+        Layout = "~/Views/Shared/Admin.cshtml";
+
+    }
+}
+
 <h2>Index</h2>
 
 <p>

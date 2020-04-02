@@ -4,6 +4,14 @@
     ViewBag.Title = "Index";
 }
 
+@{
+
+    if (Convert.ToInt32(Session["Tipo"]) == 1)
+    {
+        Layout = "~/Views/Shared/Admin.cshtml";
+
+    }
+}
 <h2>Index</h2>
 
 <p>
@@ -17,17 +25,18 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Genero)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idGenero }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idGenero }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idGenero })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genero)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idGenero }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idGenero }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idGenero })
+            </td>
+        </tr>
+    }
 
 </table>

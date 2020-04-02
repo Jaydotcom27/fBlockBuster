@@ -14,126 +14,132 @@
     }
 }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Miniatura)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Duracion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Temporadas)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Episodios)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tblArticuloDetalle.Productor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tblGenero.Genero)
-        </th>
+@Html.ActionLink("Inicio", "Series") |
 
-        <th>
-            Tipo
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Precio)
-        </th>
 
-        @{
+@Html.ActionLink("Genero", "Genero") |
 
-            if (Convert.ToInt32(Session["Tipo"]) == 1)
-            {
-                Layout = "~/Views/Shared/Admin.cshtml";
+
+@Html.ActionLink("Nombre", "Nombre") |
+
+
+@Html.ActionLink("Duracion", "Duracion") |
+
+
+@Html.ActionLink("Precio", "Precio") |
+
+        <table class="table">
+            <tr>
                 <th>
-                    Ver Más
+                    @Html.DisplayNameFor(model => model.Miniatura)
                 </th>
-            }
-        }
-
-        @{
-
-            if (Convert.ToInt32(Session["Tipo"]) == 2)
-            {
-                //Layout = "~/Views/Shared/Admin.cshtml";
                 <th>
-                    Agregar
+                    @Html.DisplayNameFor(model => model.Nombre)
                 </th>
-            }
-        }
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Duracion)
+                </th>
+                @*<th>
+                @Html.DisplayNameFor(model => model.Temporadas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Episodios)
+            </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.tblArticuloDetalle.Productor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tblGenero.Genero)
+                </th>
+                <th>
+                    Tipo
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Precio)
+                </th>
+                @{
 
+                    if (Convert.ToInt32(Session["Tipo"]) == 1)
+                    {
+                        Layout = "~/Views/Shared/Admin.cshtml";
+                        <th>
+                            Ver Más
+                        </th>
+                    }
+                }
+                @{
 
+                    if (Convert.ToInt32(Session["Tipo"]) == 2)
+                    {
+                        //Layout = "~/Views/Shared/Admin.cshtml";
+                        <th>
+                            Agregar
+                        </th>
+                    }
+                }
 
-        <th></th>
-    </tr>
+                <th></th>
+            </tr>
 
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            <img src="@Html.DisplayFor(modelItem => item.Miniatura)" width="200" height="350" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Duracion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Temporadas)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Episodios)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblArticuloDetalle.Productor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblGenero.Genero)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblTipo.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Precio)
-        </td>
-
-        @{
-            if (Convert.ToInt32(Session["Tipo"]) == 1)
+            @foreach (var item in Model)
             {
-                Layout = "~/Views/Shared/Admin.cshtml";
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.idArticulo }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.idArticulo }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.idArticulo })
+                <tr>
+                    <td>
+                        <img src="@Html.DisplayFor(modelItem => item.Miniatura)" width="200" height="350" />
+                    </td>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Duracion)
+                    </td>
+                    @*<td>
+                    @Html.DisplayFor(modelItem => item.Temporadas)
                 </td>
-            }
-        }
-
-        @{
-
-            if (Convert.ToInt32(Session["Tipo"]) == 2)
-            {
-                //Layout = "~/Views/Shared/Admin.cshtml";
                 <td>
-                    @Html.ActionLink("Agregar", "Agregar", new { id = item.idArticulo })
+                    @Html.DisplayFor(modelItem => item.Episodios)
+                </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tblArticuloDetalle.Productor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tblGenero.Genero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tblTipo.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Precio)
+                    </td>
 
-                </td>
+                    @{
+
+                        if (Convert.ToInt32(Session["Tipo"]) == 1)
+                        {
+                            Layout = "~/Views/Shared/Admin.cshtml";
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.idArticulo }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.idArticulo }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.idArticulo })
+                            </td>
+                        }
+                    }
+                    @{
+                        if (Convert.ToInt32(Session["Tipo"]) == 2)
+                        {
+                            //Layout = "~/Views/Shared/Admin.cshtml";
+                            <td>
+                                @Html.ActionLink("Agregar", "Agregar", new { id = item.idArticulo })
+                            </td>
+                        }
+                    }
+                </tr>
             }
-        }
-
-    </tr>
-    }
-
-</table>
+        </table>

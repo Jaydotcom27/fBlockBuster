@@ -4,6 +4,14 @@
     ViewBag.Title = "Index";
 }
 
+@{
+
+    if (Convert.ToInt32(Session["Tipo"]) == 1)
+    {
+        Layout = "~/Views/Shared/Admin.cshtml";
+
+    }
+}
 <h2>Index</h2>
 
 <p>
@@ -20,20 +28,21 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblArticulo.Miniatura)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblTransaccion.idTransaccion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idArticuloTransaccion }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idArticuloTransaccion }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idArticuloTransaccion })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblArticulo.Miniatura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblTransaccion.idTransaccion)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idArticuloTransaccion }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idArticuloTransaccion }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idArticuloTransaccion })
+            </td>
+        </tr>
+    }
 
 </table>

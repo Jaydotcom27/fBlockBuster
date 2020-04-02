@@ -340,6 +340,14 @@
     <Content Include="Views\tblArticuloTransacciones\Edit.cshtml" />
     <Content Include="Views\tblArticuloTransacciones\Index.cshtml" />
     <Content Include="Views\tblArticuloTransacciones\Carrito.cshtml" />
+    <Content Include="Views\tblArticulos\sGenero.cshtml" />
+    <Content Include="Views\tblArticulos\sDuracion.cshtml" />
+    <Content Include="Views\tblArticulos\sNombre.cshtml" />
+    <Content Include="Views\tblArticulos\sPrecio.cshtml" />
+    <Content Include="Views\tblArticulos\Genero.cshtml" />
+    <Content Include="Views\tblArticulos\Duracion.cshtml" />
+    <Content Include="Views\tblArticulos\Nombre.cshtml" />
+    <Content Include="Views\tblArticulos\Precio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

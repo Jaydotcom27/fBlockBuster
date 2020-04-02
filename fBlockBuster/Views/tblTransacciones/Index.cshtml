@@ -1,5 +1,13 @@
 ﻿@model IEnumerable<fBlockBuster.Models.tblTransaccion>
 
+@{
+
+    if (Convert.ToInt32(Session["Tipo"]) == 1)
+    {
+        Layout = "~/Views/Shared/Admin.cshtml";
+
+    }
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -23,29 +31,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Precio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblEstado.Estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblTipo.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblUsuario.NombreUsuario)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idTransaccion }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idTransaccion }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idTransaccion })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblEstado.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblTipo.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblUsuario.NombreUsuario)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idTransaccion }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idTransaccion }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idTransaccion })
+            </td>
+        </tr>
+    }
 
 </table>

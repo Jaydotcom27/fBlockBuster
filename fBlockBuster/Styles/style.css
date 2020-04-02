@@ -350,7 +350,7 @@ h1.error {
     letter-spacing: 0.3px;
 }
 .txt-left-side p{color:#bdbdbd;}
-.txt-left-side {background:#3a3d6e;}
+.txt-left-side {background:#222222;}
 .form-left-to-w3l {
     display: flex;
     display: -webkit-flex;
@@ -362,7 +362,7 @@ h1.error {
     -o-transition: 0.5s all;
     -ms-transition: 0.5s all;
 }
-.form-left-to-w3l input[type="email"], .form-left-to-w3l input[type="password"] {
+.form-left-to-w3l input[type="text"], .form-left-to-w3l input[type="password"] {
     -webkit-flex-basis: 90%;
     flex-basis: 90%;
     width: 100%;
@@ -629,7 +629,7 @@ h1.error {
     padding-top: 45px;
     margin-bottom: 34px;
 }
-.form-left-to-w3l input[type="email"], .form-left-to-w3l input[type="password"] {
+.form-left-to-w3l input[type="text"], .form-left-to-w3l input[type="password"] {
     padding: .5em .6em;	
 	}
 .form-left-to-w3l span {
