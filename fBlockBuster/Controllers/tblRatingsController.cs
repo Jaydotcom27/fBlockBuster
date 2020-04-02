@@ -18,7 +18,7 @@ namespace fBlockBuster.Controllers
         // GET: tblRatings
         public ActionResult Index()
         {
-            return View(db.tblRating.ToList());
+            return View(db.tblRating.SqlQuery("Select * from tblRating"));
         }
 
         // GET: tblRatings/Details/5

@@ -18,7 +18,7 @@ namespace fBlockBuster.Controllers
         // GET: tblGeneros
         public ActionResult Index()
         {
-            return View(db.tblGenero.ToList());
+            return View(db.tblGenero.SqlQuery("Select * from tblGenero"));
         }
 
         // GET: tblGeneros/Details/5

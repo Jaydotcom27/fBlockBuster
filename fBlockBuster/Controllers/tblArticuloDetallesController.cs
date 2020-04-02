@@ -19,7 +19,7 @@ namespace fBlockBuster.Controllers
         public ActionResult Index()
         {
             var tblArticuloDetalle = db.tblArticuloDetalle.Include(t => t.tblRating);
-            return View(tblArticuloDetalle.ToList());
+            return View(db.tblArticuloDetalle.SqlQuery("SELECT * from tblArticuloDetalle")); 
         }
 
         // GET: tblArticuloDetalles/Details/5

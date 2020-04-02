@@ -19,7 +19,8 @@ namespace fBlockBuster.Controllers
         public ActionResult Index()
         {
             var tblTransaccion = db.tblTransaccion./*Include(t => t.tblArticulo).*/Include(t => t.tblEstado).Include(t => t.tblTipo).Include(t => t.tblUsuario);
-            return View(tblTransaccion.ToList());
+            return View(db.tblTransaccion.SqlQuery("Select * from tblTransaccion"));
+
         }
 
         // GET: tblTransacciones/Details/5

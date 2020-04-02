@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<fBlockBuster.Models.tblTransaccion>
 
+<h2>Index</h2>
+
 @{
 
     if (Convert.ToInt32(Session["Tipo"]) == 1)
     {
         Layout = "~/Views/Shared/Admin.cshtml";
-
     }
 }
 <p>

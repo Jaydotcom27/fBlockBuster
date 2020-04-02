@@ -2,9 +2,17 @@
 
 <h2>Carrito</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@{
+    ViewBag.Title = "Home Page";
+    if (Convert.ToInt32(Session["Tipo"]) == 1)
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
+
+}
+
 <table class="table">
     <tr>
         <th>
@@ -31,7 +39,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.tblTransaccion.tblUsuario.NombreUsuario)
             </td>
-            <td>|
+            <td>
+                |
                 @Html.ActionLink("Delete", "Delete", new { id = item.idArticuloTransaccion })
             </td>
         </tr>
