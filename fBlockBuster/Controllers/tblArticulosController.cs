@@ -60,6 +60,7 @@ namespace fBlockBuster.Controllers
         // POST: tblArticulos/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idArticulo,idArticuloDetalle,idTipo,idGenero,Miniatura,Nombre,Descripcion,Duracion,Temporadas,Episodios,Precio")] tblArticulo tblArticulo)
