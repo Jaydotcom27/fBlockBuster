@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BlockBusterDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BlockBusterDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblArticulo">
           <Key>
             <PropertyRef Name="idArticulo" />
@@ -19,6 +19,7 @@
           <Property Name="Duracion" Type="time" Precision="7" />
           <Property Name="Temporadas" Type="tinyint" />
           <Property Name="Episodios" Type="tinyint" />
+          <Property Name="Precio" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="tblArticuloDetalle">
           <Key>
@@ -242,8 +243,7 @@
             <End Role="tblUsuario" EntitySet="tblUsuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BlockBusterDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -265,6 +265,7 @@
           <NavigationProperty Name="tblGenero" Relationship="Self.FK__tblArticu__idGen__440B1D61" FromRole="tblArticulo" ToRole="tblGenero" />
           <NavigationProperty Name="tblTipo" Relationship="Self.FK__tblArticu__idTip__4316F928" FromRole="tblArticulo" ToRole="tblTipo" />
           <NavigationProperty Name="tblTransaccion" Relationship="Self.FK__tblTransa__idArt__4D94879B" FromRole="tblArticulo" ToRole="tblTransaccion" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="tblArticuloDetalle">
           <Key>
@@ -511,6 +512,7 @@
           <EntitySetMapping Name="tblArticulo">
             <EntityTypeMapping TypeName="BlockBusterDBModel.tblArticulo">
               <MappingFragment StoreEntitySet="tblArticulo">
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
                 <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
                 <ScalarProperty Name="idArticuloDetalle" ColumnName="idArticuloDetalle" />
                 <ScalarProperty Name="idTipo" ColumnName="idTipo" />

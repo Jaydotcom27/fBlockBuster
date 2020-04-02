@@ -219,7 +219,6 @@
     <Content Include="Models\BaseDatosModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BaseDatosModel.edmx</DependentUpon>
-      <LastGenOutput>BaseDatosModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

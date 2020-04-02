@@ -30,6 +30,7 @@ namespace fBlockBuster.Models
         public Nullable<System.TimeSpan> Duracion { get; set; }
         public Nullable<byte> Temporadas { get; set; }
         public Nullable<byte> Episodios { get; set; }
+        public Nullable<decimal> Precio { get; set; }
     
         public virtual tblArticuloDetalle tblArticuloDetalle { get; set; }
         public virtual tblGenero tblGenero { get; set; }

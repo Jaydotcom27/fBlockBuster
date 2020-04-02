@@ -62,11 +62,11 @@ namespace fBlockBuster.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idArticulo,idArticuloDetalle,idTipo,idGenero,Miniatura,Nombre,Descripcion,Duracion,Temporadas,Episodios")] tblArticulo tblArticulo)
+        public ActionResult Create([Bind(Include = "idArticulo,idArticuloDetalle,idTipo,idGenero,Miniatura,Nombre,Descripcion,Duracion,Temporadas,Episodios,Precio")] tblArticulo tblArticulo)
         {
             if (ModelState.IsValid)
             {
-                db.Database.ExecuteSqlCommand("INSERT INTO tblArticulo VALUES(@idArticuloDetalle,@idTipo,@idGenero,@Miniatura,@Nombre,@Descripcion,@Duracion,@Temporadas,@Episodios)",
+                db.Database.ExecuteSqlCommand("INSERT INTO tblArticulo VALUES(@idArticuloDetalle,@idTipo,@idGenero,@Miniatura,@Nombre,@Descripcion,@Duracion,@Temporadas,@Episodios,@Precio)",
                     new SqlParameter("idArticuloDetalle", tblArticulo.idArticuloDetalle),
                     new SqlParameter("idTipo", tblArticulo.idTipo),
                     new SqlParameter("idGenero", tblArticulo.idGenero),
@@ -75,7 +75,8 @@ namespace fBlockBuster.Controllers
                     new SqlParameter("Descripcion", tblArticulo.Descripcion),
                     new SqlParameter("Duracion", tblArticulo.Duracion),
                     new SqlParameter("Temporadas", tblArticulo.Temporadas),
-                    new SqlParameter("Episodios", tblArticulo.Episodios)
+                    new SqlParameter("Episodios", tblArticulo.Episodios), 
+                    new SqlParameter("Precio", tblArticulo.Precio)
                     );
                 return RedirectToAction("Index");
             }
@@ -109,7 +110,7 @@ namespace fBlockBuster.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idArticulo,idArticuloDetalle,idTipo,idGenero,Miniatura,Nombre,Descripcion,Duracion,Temporadas,Episodios")] tblArticulo tblArticulo)
+        public ActionResult Edit([Bind(Include = "idArticulo,idArticuloDetalle,idTipo,idGenero,Miniatura,Nombre,Descripcion,Duracion,Temporadas,Episodios,Precio")] tblArticulo tblArticulo)
         {
             if (ModelState.IsValid)
             {
@@ -121,7 +122,9 @@ namespace fBlockBuster.Controllers
                     "Descripcion = @Descripcion, " +
                     "Duracion = @Duracion," +
                     "Temporadas = @Temporadas, " +
-                    "Episodios = @Episodios " +
+                    "Episodios = @Episodios, " +
+                    "Precio = @Precio " +
+
                     "WHERE idArticulo = @idArticulo",
 
                     new SqlParameter("idTipo", tblArticulo.idTipo),
@@ -132,7 +135,9 @@ namespace fBlockBuster.Controllers
                     new SqlParameter("Duracion", tblArticulo.Duracion),
                     new SqlParameter("Temporadas", tblArticulo.Temporadas),
                     new SqlParameter("Episodios", tblArticulo.Episodios),
-                    new SqlParameter("idArticulo", tblArticulo.idArticulo)
+                    new SqlParameter("idArticulo", tblArticulo.idArticulo),
+                    new SqlParameter("Precio", tblArticulo.Precio)
+
                     );
                 return RedirectToAction("Index");
             }

@@ -47,9 +47,12 @@
         <th>
             Tipo
         </th>
-         @*<th>
-            Ver Más
-         </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+        @*<th>
+           Ver Más
+        </th>*@
         <th></th>
     </tr>
 
@@ -84,6 +87,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.tblTipo.Descripcion)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Precio)
+        </td>
+
         @{
 
             if (Convert.ToInt32(Session["Tipo"]) == 1)

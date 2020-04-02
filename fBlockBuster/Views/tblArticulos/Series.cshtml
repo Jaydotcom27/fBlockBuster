@@ -40,8 +40,12 @@
         <th>
             @Html.DisplayNameFor(model => model.tblGenero.Genero)
         </th>
+
         <th>
             Tipo
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
         </th>
 
         @*<th>
@@ -80,6 +84,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.tblTipo.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Precio)
         </td>
 
         @{
