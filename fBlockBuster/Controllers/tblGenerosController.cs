@@ -85,7 +85,10 @@ namespace fBlockBuster.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Database.ExecuteSqlCommand("UPDATE tblEstado SET  idGenero = @idGenero, Genero = @Genero",
+                db.Database.ExecuteSqlCommand("UPDATE tblGenero " +
+                    "SET Genero = @Genero " +
+                    "WHERE idGenero = @idGenero",
+
                     new SqlParameter("idGenero", tblGenero.idGenero),
                     new SqlParameter("Genero", tblGenero.Genero)
                     );
@@ -115,7 +118,7 @@ namespace fBlockBuster.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             tblGenero tblGenero = db.tblGenero.Find(id);
-            db.Database.ExecuteSqlCommand("DELETE FROM tblArticulo WHERE idGenero = @idGenero",
+            db.Database.ExecuteSqlCommand("DELETE FROM tblGenero WHERE idGenero = @idGenero",
                 new SqlParameter("idGenero", tblGenero.idGenero)
                 );
             return RedirectToAction("Index");

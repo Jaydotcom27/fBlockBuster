@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0661f811d2814d6192bcf162a7c54f84" Name="Diagram1" ZoomLevel="105">
+      <Diagram DiagramId="0661f811d2814d6192bcf162a7c54f84" Name="Diagram1" ZoomLevel="79">
         <EntityTypeShape EntityType="BlockBusterDBModel.tblArticulo" Width="1.5" PointX="6" PointY="4.875" />
         <EntityTypeShape EntityType="BlockBusterDBModel.tblArticuloDetalle" Width="1.5" PointX="3.75" PointY="9.375" />
         <EntityTypeShape EntityType="BlockBusterDBModel.tblArticuloTransaccion" Width="1.5" PointX="10.5" PointY="5.875" />

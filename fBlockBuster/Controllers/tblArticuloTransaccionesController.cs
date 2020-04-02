@@ -70,7 +70,8 @@ namespace fBlockBuster.Controllers
             string SQL = "  Select sum(tblArticulo.Precio) as sumPrecios " +
                 "from tblArticulo " +
                 "inner join tblArticuloTransaccion on tblArticuloTransaccion.idArticulo = tblArticulo.idArticulo " +
-                "inner join tblTransaccion on tblArticuloTransaccion.idTransaccion = tblTransaccion.idTransaccion where idUsuario = '" + sidUsuario + "' and tblTransaccion.idEstado = 1; ";
+                "inner join tblTransaccion on tblArticuloTransaccion.idTransaccion = tblTransaccion.idTransaccion " +
+                "WHERE idUsuario = '" + sidUsuario + "' and tblTransaccion.idEstado = 1; ";
 
             SqlConnection conn = new SqlConnection(ConnectionString);
 
@@ -95,7 +96,7 @@ namespace fBlockBuster.Controllers
             new SqlParameter("Precio", sumPrecio),
             new SqlParameter("idUsuario", sidUsuario)
             );
-            return View($"~/Views/Home/Index.cshtml"); //-----------------Compra Exitosa Here
+            return View($"~/Views/Home/Index.cshtml"); 
         }
 
         // GET: tblArticuloTransacciones/Details/5
@@ -231,7 +232,7 @@ namespace fBlockBuster.Controllers
                 new SqlParameter("idArticuloTransaccion", tblArticuloTransaccion.idArticuloTransaccion)
                 );
 
-            return RedirectToAction("Index");
+            return View($"~/Views/Home/Index.cshtml");
         }
 
         protected override void Dispose(bool disposing)

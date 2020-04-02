@@ -85,8 +85,11 @@ namespace fBlockBuster.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Database.ExecuteSqlCommand("UPDATE tblRating SET  Rating = @Rating)",
+                db.Database.ExecuteSqlCommand("UPDATE tblRating " +
+                    "SET  Rating = @Rating " +
+                    "Where idRating =@idRating",
 
+               new SqlParameter("idRating", tblRating.idRating),
                new SqlParameter("Rating", tblRating.Rating)
                );
                 return RedirectToAction("Index");
@@ -115,8 +118,7 @@ namespace fBlockBuster.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             tblRating tblRating = db.tblRating.Find(id);
-            db.Database.ExecuteSqlCommand("DELETE FROM tblRating WHERE idRating = @Rating)",
-
+            db.Database.ExecuteSqlCommand("DELETE FROM tblRating WHERE idRating = @idRating",
                new SqlParameter("idRating", tblRating.idRating)
                );
             return RedirectToAction("Index");
