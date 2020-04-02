@@ -1,0 +1,43 @@
+﻿@model IEnumerable<fBlockBuster.Models.tblArticuloTransaccion>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tblArticulo.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblTransaccion.Precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblTransaccion.tblUsuario.NombreUsuario)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblArticulo.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblArticulo.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblTransaccion.tblUsuario.NombreUsuario)
+            </td>
+            <td>|
+                @Html.ActionLink("Delete", "Delete", new { id = item.idArticuloTransaccion })
+            </td>
+        </tr>
+    }
+
+</table>
+<h3>Total:</h3>
+<hr>
+<h5>@ViewBag.PrecioSumado</h5>
+@Html.ActionLink("Confirmar Compra", "Confirmar", "tblArticuloTransacciones")
+

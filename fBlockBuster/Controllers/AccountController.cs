@@ -53,6 +53,10 @@ namespace fBlockBuster.Controllers
                     isAdmin = true;
                 }
 
+                int iduser = Convert.ToInt32(reader.GetSqlInt32(reader.GetOrdinal("idUsuario")).Value);
+                Session["usuarioSes"] = iduser;
+
+
                 if (isAdmin)
                 {
                     con.Close();
@@ -85,7 +89,7 @@ namespace fBlockBuster.Controllers
         public ActionResult aCreate(Account acc)
         {
             connectionString();
-            com.CommandText = "INSERT into tblUsuario (NombreUsuario, PasswordUsuario, idTipo) VALUES ('" + acc.Name + "', '" + acc.Password + "', '0')";
+            com.CommandText = "INSERT into tblUsuario (NombreUsuario, PasswordUsuario, idTipo) VALUES ('" + acc.Name + "', '" + acc.Password + "', '2')";
             com.Connection = con;
             try
             {

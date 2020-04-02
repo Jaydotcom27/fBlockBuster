@@ -4,24 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0661f811d2814d6192bcf162a7c54f84" Name="Diagram1" ZoomLevel="80">
-        <EntityTypeShape EntityType="BlockBusterDBModel.tblArticulo" Width="1.5" PointX="3.625" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BlockBusterDBModel.tblArticuloDetalle" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BlockBusterDBModel.tblEstado" Width="1.5" PointX="4" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BlockBusterDBModel.tblGenero" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BlockBusterDBModel.tblRating" Width="1.5" PointX="1.5" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BlockBusterDBModel.tblTipo" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BlockBusterDBModel.tblTransaccion" Width="1.5" PointX="7.375" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BlockBusterDBModel.tblUsuario" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
-        <AssociationConnector Association="BlockBusterDBModel.FK__tblArticu__idArt__4222D4EF" ManuallyRouted="false" />
-        <AssociationConnector Association="BlockBusterDBModel.FK__tblArticu__idGen__440B1D61" ManuallyRouted="false" />
-        <AssociationConnector Association="BlockBusterDBModel.FK__tblArticu__idTip__4316F928" ManuallyRouted="false" />
-        <AssociationConnector Association="BlockBusterDBModel.FK__tblTransa__idArt__4D94879B" ManuallyRouted="false" />
-        <AssociationConnector Association="BlockBusterDBModel.FK__tblArticu__idRat__3F466844" ManuallyRouted="false" />
-        <AssociationConnector Association="BlockBusterDBModel.FK__tblTransa__idEst__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="BlockBusterDBModel.FK__tblTransa__idTip__4AB81AF0" ManuallyRouted="false" />
-        <AssociationConnector Association="BlockBusterDBModel.FK__tblUsuari__idTip__46E78A0C" ManuallyRouted="false" />
-        <AssociationConnector Association="BlockBusterDBModel.FK__tblTransa__idUsu__4CA06362" ManuallyRouted="false" />
+      <Diagram DiagramId="0661f811d2814d6192bcf162a7c54f84" Name="Diagram1" ZoomLevel="105">
+        <EntityTypeShape EntityType="BlockBusterDBModel.tblArticulo" Width="1.5" PointX="6" PointY="4.875" />
+        <EntityTypeShape EntityType="BlockBusterDBModel.tblArticuloDetalle" Width="1.5" PointX="3.75" PointY="9.375" />
+        <EntityTypeShape EntityType="BlockBusterDBModel.tblArticuloTransaccion" Width="1.5" PointX="10.5" PointY="5.875" />
+        <EntityTypeShape EntityType="BlockBusterDBModel.tblEstado" Width="1.5" PointX="6" PointY="2" />
+        <EntityTypeShape EntityType="BlockBusterDBModel.tblGenero" Width="1.5" PointX="3.75" PointY="3" />
+        <EntityTypeShape EntityType="BlockBusterDBModel.tblRating" Width="1.5" PointX="1.5" PointY="10.25" />
+        <EntityTypeShape EntityType="BlockBusterDBModel.tblTipo" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="BlockBusterDBModel.tblTransaccion" Width="1.5" PointX="8.25" PointY="5.375" />
+        <EntityTypeShape EntityType="BlockBusterDBModel.tblUsuario" Width="1.5" PointX="3" PointY="5.5" />
+        <AssociationConnector Association="BlockBusterDBModel.FK__tblArticu__idArt__4222D4EF" />
+        <AssociationConnector Association="BlockBusterDBModel.FK__tblArticu__idArt__4F7CD00D" />
+        <AssociationConnector Association="BlockBusterDBModel.FK__tblArticu__idGen__440B1D61" />
+        <AssociationConnector Association="BlockBusterDBModel.FK__tblArticu__idTip__4316F928" />
+        <AssociationConnector Association="BlockBusterDBModel.FK__tblArticu__idRat__3F466844" />
+        <AssociationConnector Association="BlockBusterDBModel.FK__tblArticu__idTra__5070F446" />
+        <AssociationConnector Association="BlockBusterDBModel.FK__tblTransa__idEst__4BAC3F29" />
+        <AssociationConnector Association="BlockBusterDBModel.FK__tblTransa__idTip__4AB81AF0" />
+        <AssociationConnector Association="BlockBusterDBModel.FK__tblUsuari__idTip__46E78A0C" />
+        <AssociationConnector Association="BlockBusterDBModel.FK__tblTransa__idUsu__4CA06362" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

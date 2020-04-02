@@ -14,16 +14,21 @@ namespace fBlockBuster.Models
     
     public partial class tblTransaccion
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblTransaccion()
+        {
+            this.tblArticuloTransaccion = new HashSet<tblArticuloTransaccion>();
+        }
+    
         public int idTransaccion { get; set; }
         public int idTipo { get; set; }
         public Nullable<int> idEstado { get; set; }
         public int idUsuario { get; set; }
-        public int idArticulo { get; set; }
         public decimal Precio { get; set; }
-        public Nullable<System.TimeSpan> Duracion { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
     
-        public virtual tblArticulo tblArticulo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblArticuloTransaccion> tblArticuloTransaccion { get; set; }
         public virtual tblEstado tblEstado { get; set; }
         public virtual tblTipo tblTipo { get; set; }
         public virtual tblUsuario tblUsuario { get; set; }

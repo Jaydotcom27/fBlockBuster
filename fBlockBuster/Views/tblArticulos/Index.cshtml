@@ -60,6 +60,16 @@
                 </th>
             }
         }
+        @{
+
+            if (Convert.ToInt32(Session["Tipo"]) == 2)
+            {
+                //Layout = "~/Views/Shared/Admin.cshtml";
+                <th>
+                    Agregar
+                </th>
+            }
+        }
 
 
 
@@ -120,10 +130,12 @@
             if (Convert.ToInt32(Session["Tipo"]) == 2)
             {
                 //Layout = "~/Views/Shared/Admin.cshtml";
+                <td>
+                    @Html.ActionLink("Agregar", "Agregar", new { id = item.idArticulo }) 
 
+                </td>
             }
         }
-
 
     </tr>
     }

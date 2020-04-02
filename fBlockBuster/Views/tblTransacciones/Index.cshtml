@@ -1,11 +1,5 @@
 ﻿@model IEnumerable<fBlockBuster.Models.tblTransaccion>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -15,13 +9,7 @@
             @Html.DisplayNameFor(model => model.Precio)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Duracion)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Fecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tblArticulo.Miniatura)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.tblEstado.Estado)
@@ -41,13 +29,7 @@
             @Html.DisplayFor(modelItem => item.Precio)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Duracion)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblArticulo.Miniatura)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.tblEstado.Estado)

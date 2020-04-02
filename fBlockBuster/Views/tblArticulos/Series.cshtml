@@ -48,9 +48,29 @@
             @Html.DisplayNameFor(model => model.Precio)
         </th>
 
-        @*<th>
-            Ver Más
-        </th>*@
+        @{
+
+            if (Convert.ToInt32(Session["Tipo"]) == 1)
+            {
+                Layout = "~/Views/Shared/Admin.cshtml";
+                <th>
+                    Ver Más
+                </th>
+            }
+        }
+
+        @{
+
+            if (Convert.ToInt32(Session["Tipo"]) == 2)
+            {
+                //Layout = "~/Views/Shared/Admin.cshtml";
+                <th>
+                    Agregar
+                </th>
+            }
+        }
+
+
 
         <th></th>
     </tr>
@@ -106,6 +126,10 @@
             if (Convert.ToInt32(Session["Tipo"]) == 2)
             {
                 //Layout = "~/Views/Shared/Admin.cshtml";
+                <td>
+                    @Html.ActionLink("Agregar", "Agregar", new { id = item.idArticulo })
+
+                </td>
             }
         }
 

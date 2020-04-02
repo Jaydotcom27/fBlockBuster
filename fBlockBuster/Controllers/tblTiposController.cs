@@ -18,16 +18,7 @@ namespace fBlockBuster.Controllers
         // GET: tblTipos
         public ActionResult Index()
         {
-            int caseSwitch = 1;
-            switch (caseSwitch)
-            {
-                case 1:
-                    return View(db.tblTipo.SqlQuery("Select * from TblTipo Order By TipoTipo ASC"));
-                case 2:
-                    return View(db.tblTipo.SqlQuery("Select * from TblTipo Order By TipoTipo DESC"));
-                default:
-                    break;
-            }
+            
             return View(db.tblTipo.SqlQuery("Select * from TblTipo Order By TipoTipo ASC"));
         }
 

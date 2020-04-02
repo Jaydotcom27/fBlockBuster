@@ -27,6 +27,7 @@ namespace fBlockBuster.Models
     
         public virtual DbSet<tblArticulo> tblArticulo { get; set; }
         public virtual DbSet<tblArticuloDetalle> tblArticuloDetalle { get; set; }
+        public virtual DbSet<tblArticuloTransaccion> tblArticuloTransaccion { get; set; }
         public virtual DbSet<tblEstado> tblEstado { get; set; }
         public virtual DbSet<tblGenero> tblGenero { get; set; }
         public virtual DbSet<tblRating> tblRating { get; set; }

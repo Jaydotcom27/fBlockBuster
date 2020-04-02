@@ -19,7 +19,7 @@
           <Property Name="Duracion" Type="time" Precision="7" />
           <Property Name="Temporadas" Type="tinyint" />
           <Property Name="Episodios" Type="tinyint" />
-          <Property Name="Precio" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Precio" Type="decimal" Precision="7" Scale="2" />
         </EntityType>
         <EntityType Name="tblArticuloDetalle">
           <Key>
@@ -35,6 +35,14 @@
           <Property Name="Subtitulos" Type="varchar" MaxLength="64" />
           <Property Name="Nota" Type="decimal" Precision="6" Scale="2" />
           <Property Name="Año" Type="date" />
+        </EntityType>
+        <EntityType Name="tblArticuloTransaccion">
+          <Key>
+            <PropertyRef Name="idArticuloTransaccion" />
+          </Key>
+          <Property Name="idArticuloTransaccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idArticulo" Type="int" Nullable="false" />
+          <Property Name="idTransaccion" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblEstado">
           <Key>
@@ -73,9 +81,7 @@
           <Property Name="idTipo" Type="int" Nullable="false" />
           <Property Name="idEstado" Type="int" />
           <Property Name="idUsuario" Type="int" Nullable="false" />
-          <Property Name="idArticulo" Type="int" Nullable="false" />
           <Property Name="Precio" Type="decimal" Precision="6" Scale="2" Nullable="false" />
-          <Property Name="Duracion" Type="time" Precision="7" />
           <Property Name="Fecha" Type="datetime" />
         </EntityType>
         <EntityType Name="tblUsuario">
@@ -98,6 +104,18 @@
             </Principal>
             <Dependent Role="tblArticulo">
               <PropertyRef Name="idArticuloDetalle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblArticu__idArt__4F7CD00D">
+          <End Role="tblArticulo" Type="Self.tblArticulo" Multiplicity="1" />
+          <End Role="tblArticuloTransaccion" Type="Self.tblArticuloTransaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblArticulo">
+              <PropertyRef Name="idArticulo" />
+            </Principal>
+            <Dependent Role="tblArticuloTransaccion">
+              <PropertyRef Name="idArticulo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -137,15 +155,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblTransa__idArt__4D94879B">
-          <End Role="tblArticulo" Type="Self.tblArticulo" Multiplicity="1" />
-          <End Role="tblTransaccion" Type="Self.tblTransaccion" Multiplicity="*" />
+        <Association Name="FK__tblArticu__idTra__5070F446">
+          <End Role="tblTransaccion" Type="Self.tblTransaccion" Multiplicity="1" />
+          <End Role="tblArticuloTransaccion" Type="Self.tblArticuloTransaccion" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tblArticulo">
-              <PropertyRef Name="idArticulo" />
+            <Principal Role="tblTransaccion">
+              <PropertyRef Name="idTransaccion" />
             </Principal>
-            <Dependent Role="tblTransaccion">
-              <PropertyRef Name="idArticulo" />
+            <Dependent Role="tblArticuloTransaccion">
+              <PropertyRef Name="idTransaccion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -200,6 +218,7 @@
         <EntityContainer Name="BlockBusterDBModelStoreContainer">
           <EntitySet Name="tblArticulo" EntityType="Self.tblArticulo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblArticuloDetalle" EntityType="Self.tblArticuloDetalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblArticuloTransaccion" EntityType="Self.tblArticuloTransaccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEstado" EntityType="Self.tblEstado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblGenero" EntityType="Self.tblGenero" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRating" EntityType="Self.tblRating" Schema="dbo" store:Type="Tables" />
@@ -209,6 +228,10 @@
           <AssociationSet Name="FK__tblArticu__idArt__4222D4EF" Association="Self.FK__tblArticu__idArt__4222D4EF">
             <End Role="tblArticuloDetalle" EntitySet="tblArticuloDetalle" />
             <End Role="tblArticulo" EntitySet="tblArticulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblArticu__idArt__4F7CD00D" Association="Self.FK__tblArticu__idArt__4F7CD00D">
+            <End Role="tblArticulo" EntitySet="tblArticulo" />
+            <End Role="tblArticuloTransaccion" EntitySet="tblArticuloTransaccion" />
           </AssociationSet>
           <AssociationSet Name="FK__tblArticu__idGen__440B1D61" Association="Self.FK__tblArticu__idGen__440B1D61">
             <End Role="tblGenero" EntitySet="tblGenero" />
@@ -222,9 +245,9 @@
             <End Role="tblTipo" EntitySet="tblTipo" />
             <End Role="tblArticulo" EntitySet="tblArticulo" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblTransa__idArt__4D94879B" Association="Self.FK__tblTransa__idArt__4D94879B">
-            <End Role="tblArticulo" EntitySet="tblArticulo" />
+          <AssociationSet Name="FK__tblArticu__idTra__5070F446" Association="Self.FK__tblArticu__idTra__5070F446">
             <End Role="tblTransaccion" EntitySet="tblTransaccion" />
+            <End Role="tblArticuloTransaccion" EntitySet="tblArticuloTransaccion" />
           </AssociationSet>
           <AssociationSet Name="FK__tblTransa__idEst__4BAC3F29" Association="Self.FK__tblTransa__idEst__4BAC3F29">
             <End Role="tblEstado" EntitySet="tblEstado" />
@@ -247,6 +270,57 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BlockBusterDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BlockBusterDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblArticulo" EntityType="BlockBusterDBModel.tblArticulo" />
+          <EntitySet Name="tblArticuloDetalle" EntityType="BlockBusterDBModel.tblArticuloDetalle" />
+          <EntitySet Name="tblArticuloTransaccion" EntityType="BlockBusterDBModel.tblArticuloTransaccion" />
+          <EntitySet Name="tblEstado" EntityType="BlockBusterDBModel.tblEstado" />
+          <EntitySet Name="tblGenero" EntityType="BlockBusterDBModel.tblGenero" />
+          <EntitySet Name="tblRating" EntityType="BlockBusterDBModel.tblRating" />
+          <EntitySet Name="tblTipo" EntityType="BlockBusterDBModel.tblTipo" />
+          <EntitySet Name="tblTransaccion" EntityType="BlockBusterDBModel.tblTransaccion" />
+          <EntitySet Name="tblUsuario" EntityType="BlockBusterDBModel.tblUsuario" />
+          <AssociationSet Name="FK__tblArticu__idArt__4222D4EF" Association="BlockBusterDBModel.FK__tblArticu__idArt__4222D4EF">
+            <End Role="tblArticuloDetalle" EntitySet="tblArticuloDetalle" />
+            <End Role="tblArticulo" EntitySet="tblArticulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblArticu__idArt__4F7CD00D" Association="BlockBusterDBModel.FK__tblArticu__idArt__4F7CD00D">
+            <End Role="tblArticulo" EntitySet="tblArticulo" />
+            <End Role="tblArticuloTransaccion" EntitySet="tblArticuloTransaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblArticu__idGen__440B1D61" Association="BlockBusterDBModel.FK__tblArticu__idGen__440B1D61">
+            <End Role="tblGenero" EntitySet="tblGenero" />
+            <End Role="tblArticulo" EntitySet="tblArticulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblArticu__idTip__4316F928" Association="BlockBusterDBModel.FK__tblArticu__idTip__4316F928">
+            <End Role="tblTipo" EntitySet="tblTipo" />
+            <End Role="tblArticulo" EntitySet="tblArticulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblArticu__idRat__3F466844" Association="BlockBusterDBModel.FK__tblArticu__idRat__3F466844">
+            <End Role="tblRating" EntitySet="tblRating" />
+            <End Role="tblArticuloDetalle" EntitySet="tblArticuloDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblArticu__idTra__5070F446" Association="BlockBusterDBModel.FK__tblArticu__idTra__5070F446">
+            <End Role="tblTransaccion" EntitySet="tblTransaccion" />
+            <End Role="tblArticuloTransaccion" EntitySet="tblArticuloTransaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblTransa__idEst__4BAC3F29" Association="BlockBusterDBModel.FK__tblTransa__idEst__4BAC3F29">
+            <End Role="tblEstado" EntitySet="tblEstado" />
+            <End Role="tblTransaccion" EntitySet="tblTransaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblTransa__idTip__4AB81AF0" Association="BlockBusterDBModel.FK__tblTransa__idTip__4AB81AF0">
+            <End Role="tblTipo" EntitySet="tblTipo" />
+            <End Role="tblTransaccion" EntitySet="tblTransaccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblUsuari__idTip__46E78A0C" Association="BlockBusterDBModel.FK__tblUsuari__idTip__46E78A0C">
+            <End Role="tblTipo" EntitySet="tblTipo" />
+            <End Role="tblUsuario" EntitySet="tblUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblTransa__idUsu__4CA06362" Association="BlockBusterDBModel.FK__tblTransa__idUsu__4CA06362">
+            <End Role="tblUsuario" EntitySet="tblUsuario" />
+            <End Role="tblTransaccion" EntitySet="tblTransaccion" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="tblArticulo">
           <Key>
             <PropertyRef Name="idArticulo" />
@@ -256,16 +330,16 @@
           <Property Name="idTipo" Type="Int32" Nullable="false" />
           <Property Name="idGenero" Type="Int32" Nullable="false" />
           <Property Name="Miniatura" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="Nombre" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="Duracion" Type="Time" Precision="7" />
           <Property Name="Temporadas" Type="Byte" />
           <Property Name="Episodios" Type="Byte" />
-          <NavigationProperty Name="tblArticuloDetalle" Relationship="Self.FK__tblArticu__idArt__4222D4EF" FromRole="tblArticulo" ToRole="tblArticuloDetalle" />
-          <NavigationProperty Name="tblGenero" Relationship="Self.FK__tblArticu__idGen__440B1D61" FromRole="tblArticulo" ToRole="tblGenero" />
-          <NavigationProperty Name="tblTipo" Relationship="Self.FK__tblArticu__idTip__4316F928" FromRole="tblArticulo" ToRole="tblTipo" />
-          <NavigationProperty Name="tblTransaccion" Relationship="Self.FK__tblTransa__idArt__4D94879B" FromRole="tblArticulo" ToRole="tblTransaccion" />
-          <Property Name="Precio" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Precio" Type="Decimal" Precision="7" Scale="2" />
+          <NavigationProperty Name="tblArticuloDetalle" Relationship="BlockBusterDBModel.FK__tblArticu__idArt__4222D4EF" FromRole="tblArticulo" ToRole="tblArticuloDetalle" />
+          <NavigationProperty Name="tblArticuloTransaccion" Relationship="BlockBusterDBModel.FK__tblArticu__idArt__4F7CD00D" FromRole="tblArticulo" ToRole="tblArticuloTransaccion" />
+          <NavigationProperty Name="tblGenero" Relationship="BlockBusterDBModel.FK__tblArticu__idGen__440B1D61" FromRole="tblArticulo" ToRole="tblGenero" />
+          <NavigationProperty Name="tblTipo" Relationship="BlockBusterDBModel.FK__tblArticu__idTip__4316F928" FromRole="tblArticulo" ToRole="tblTipo" />
         </EntityType>
         <EntityType Name="tblArticuloDetalle">
           <Key>
@@ -281,8 +355,18 @@
           <Property Name="Subtitulos" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Nota" Type="Decimal" Precision="6" Scale="2" />
           <Property Name="Año" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="tblArticulo" Relationship="Self.FK__tblArticu__idArt__4222D4EF" FromRole="tblArticuloDetalle" ToRole="tblArticulo" />
-          <NavigationProperty Name="tblRating" Relationship="Self.FK__tblArticu__idRat__3F466844" FromRole="tblArticuloDetalle" ToRole="tblRating" />
+          <NavigationProperty Name="tblArticulo" Relationship="BlockBusterDBModel.FK__tblArticu__idArt__4222D4EF" FromRole="tblArticuloDetalle" ToRole="tblArticulo" />
+          <NavigationProperty Name="tblRating" Relationship="BlockBusterDBModel.FK__tblArticu__idRat__3F466844" FromRole="tblArticuloDetalle" ToRole="tblRating" />
+        </EntityType>
+        <EntityType Name="tblArticuloTransaccion">
+          <Key>
+            <PropertyRef Name="idArticuloTransaccion" />
+          </Key>
+          <Property Name="idArticuloTransaccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idArticulo" Type="Int32" Nullable="false" />
+          <Property Name="idTransaccion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblArticulo" Relationship="BlockBusterDBModel.FK__tblArticu__idArt__4F7CD00D" FromRole="tblArticuloTransaccion" ToRole="tblArticulo" />
+          <NavigationProperty Name="tblTransaccion" Relationship="BlockBusterDBModel.FK__tblArticu__idTra__5070F446" FromRole="tblArticuloTransaccion" ToRole="tblTransaccion" />
         </EntityType>
         <EntityType Name="tblEstado">
           <Key>
@@ -290,34 +374,34 @@
           </Key>
           <Property Name="idEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tblTransaccion" Relationship="Self.FK__tblTransa__idEst__4BAC3F29" FromRole="tblEstado" ToRole="tblTransaccion" />
+          <NavigationProperty Name="tblTransaccion" Relationship="BlockBusterDBModel.FK__tblTransa__idEst__4BAC3F29" FromRole="tblEstado" ToRole="tblTransaccion" />
         </EntityType>
         <EntityType Name="tblGenero">
           <Key>
             <PropertyRef Name="idGenero" />
           </Key>
           <Property Name="idGenero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Genero" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblArticulo" Relationship="Self.FK__tblArticu__idGen__440B1D61" FromRole="tblGenero" ToRole="tblArticulo" />
+          <Property Name="Genero" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblArticulo" Relationship="BlockBusterDBModel.FK__tblArticu__idGen__440B1D61" FromRole="tblGenero" ToRole="tblArticulo" />
         </EntityType>
         <EntityType Name="tblRating">
           <Key>
             <PropertyRef Name="idRating" />
           </Key>
           <Property Name="idRating" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Rating" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblArticuloDetalle" Relationship="Self.FK__tblArticu__idRat__3F466844" FromRole="tblRating" ToRole="tblArticuloDetalle" />
+          <Property Name="Rating" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblArticuloDetalle" Relationship="BlockBusterDBModel.FK__tblArticu__idRat__3F466844" FromRole="tblRating" ToRole="tblArticuloDetalle" />
         </EntityType>
         <EntityType Name="tblTipo">
           <Key>
             <PropertyRef Name="idTipo" />
           </Key>
           <Property Name="idTipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TipoTipo" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblArticulo" Relationship="Self.FK__tblArticu__idTip__4316F928" FromRole="tblTipo" ToRole="tblArticulo" />
-          <NavigationProperty Name="tblTransaccion" Relationship="Self.FK__tblTransa__idTip__4AB81AF0" FromRole="tblTipo" ToRole="tblTransaccion" />
-          <NavigationProperty Name="tblUsuario" Relationship="Self.FK__tblUsuari__idTip__46E78A0C" FromRole="tblTipo" ToRole="tblUsuario" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="TipoTipo" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblArticulo" Relationship="BlockBusterDBModel.FK__tblArticu__idTip__4316F928" FromRole="tblTipo" ToRole="tblArticulo" />
+          <NavigationProperty Name="tblTransaccion" Relationship="BlockBusterDBModel.FK__tblTransa__idTip__4AB81AF0" FromRole="tblTipo" ToRole="tblTransaccion" />
+          <NavigationProperty Name="tblUsuario" Relationship="BlockBusterDBModel.FK__tblUsuari__idTip__46E78A0C" FromRole="tblTipo" ToRole="tblUsuario" />
         </EntityType>
         <EntityType Name="tblTransaccion">
           <Key>
@@ -327,14 +411,12 @@
           <Property Name="idTipo" Type="Int32" Nullable="false" />
           <Property Name="idEstado" Type="Int32" />
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
-          <Property Name="idArticulo" Type="Int32" Nullable="false" />
-          <Property Name="Precio" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
-          <Property Name="Duracion" Type="Time" Precision="7" />
+          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
           <Property Name="Fecha" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblArticulo" Relationship="Self.FK__tblTransa__idArt__4D94879B" FromRole="tblTransaccion" ToRole="tblArticulo" />
-          <NavigationProperty Name="tblEstado" Relationship="Self.FK__tblTransa__idEst__4BAC3F29" FromRole="tblTransaccion" ToRole="tblEstado" />
-          <NavigationProperty Name="tblTipo" Relationship="Self.FK__tblTransa__idTip__4AB81AF0" FromRole="tblTransaccion" ToRole="tblTipo" />
-          <NavigationProperty Name="tblUsuario" Relationship="Self.FK__tblTransa__idUsu__4CA06362" FromRole="tblTransaccion" ToRole="tblUsuario" />
+          <NavigationProperty Name="tblArticuloTransaccion" Relationship="BlockBusterDBModel.FK__tblArticu__idTra__5070F446" FromRole="tblTransaccion" ToRole="tblArticuloTransaccion" />
+          <NavigationProperty Name="tblEstado" Relationship="BlockBusterDBModel.FK__tblTransa__idEst__4BAC3F29" FromRole="tblTransaccion" ToRole="tblEstado" />
+          <NavigationProperty Name="tblTipo" Relationship="BlockBusterDBModel.FK__tblTransa__idTip__4AB81AF0" FromRole="tblTransaccion" ToRole="tblTipo" />
+          <NavigationProperty Name="tblUsuario" Relationship="BlockBusterDBModel.FK__tblTransa__idUsu__4CA06362" FromRole="tblTransaccion" ToRole="tblUsuario" />
         </EntityType>
         <EntityType Name="tblUsuario">
           <Key>
@@ -346,12 +428,12 @@
           <Property Name="Correo" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="PasswordUsuario" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="CreadoEn" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="tblTipo" Relationship="Self.FK__tblUsuari__idTip__46E78A0C" FromRole="tblUsuario" ToRole="tblTipo" />
-          <NavigationProperty Name="tblTransaccion" Relationship="Self.FK__tblTransa__idUsu__4CA06362" FromRole="tblUsuario" ToRole="tblTransaccion" />
+          <NavigationProperty Name="tblTipo" Relationship="BlockBusterDBModel.FK__tblUsuari__idTip__46E78A0C" FromRole="tblUsuario" ToRole="tblTipo" />
+          <NavigationProperty Name="tblTransaccion" Relationship="BlockBusterDBModel.FK__tblTransa__idUsu__4CA06362" FromRole="tblUsuario" ToRole="tblTransaccion" />
         </EntityType>
         <Association Name="FK__tblArticu__idArt__4222D4EF">
-          <End Role="tblArticuloDetalle" Type="Self.tblArticuloDetalle" Multiplicity="1" />
-          <End Role="tblArticulo" Type="Self.tblArticulo" Multiplicity="*" />
+          <End Type="BlockBusterDBModel.tblArticuloDetalle" Role="tblArticuloDetalle" Multiplicity="1" />
+          <End Type="BlockBusterDBModel.tblArticulo" Role="tblArticulo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblArticuloDetalle">
               <PropertyRef Name="idArticuloDetalle" />
@@ -361,9 +443,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__tblArticu__idArt__4F7CD00D">
+          <End Type="BlockBusterDBModel.tblArticulo" Role="tblArticulo" Multiplicity="1" />
+          <End Type="BlockBusterDBModel.tblArticuloTransaccion" Role="tblArticuloTransaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblArticulo">
+              <PropertyRef Name="idArticulo" />
+            </Principal>
+            <Dependent Role="tblArticuloTransaccion">
+              <PropertyRef Name="idArticulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__tblArticu__idGen__440B1D61">
-          <End Role="tblGenero" Type="Self.tblGenero" Multiplicity="1" />
-          <End Role="tblArticulo" Type="Self.tblArticulo" Multiplicity="*" />
+          <End Type="BlockBusterDBModel.tblGenero" Role="tblGenero" Multiplicity="1" />
+          <End Type="BlockBusterDBModel.tblArticulo" Role="tblArticulo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblGenero">
               <PropertyRef Name="idGenero" />
@@ -374,8 +468,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblArticu__idTip__4316F928">
-          <End Role="tblTipo" Type="Self.tblTipo" Multiplicity="1" />
-          <End Role="tblArticulo" Type="Self.tblArticulo" Multiplicity="*" />
+          <End Type="BlockBusterDBModel.tblTipo" Role="tblTipo" Multiplicity="1" />
+          <End Type="BlockBusterDBModel.tblArticulo" Role="tblArticulo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblTipo">
               <PropertyRef Name="idTipo" />
@@ -385,21 +479,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblTransa__idArt__4D94879B">
-          <End Role="tblArticulo" Type="Self.tblArticulo" Multiplicity="1" />
-          <End Role="tblTransaccion" Type="Self.tblTransaccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblArticulo">
-              <PropertyRef Name="idArticulo" />
-            </Principal>
-            <Dependent Role="tblTransaccion">
-              <PropertyRef Name="idArticulo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__tblArticu__idRat__3F466844">
-          <End Role="tblRating" Type="Self.tblRating" Multiplicity="1" />
-          <End Role="tblArticuloDetalle" Type="Self.tblArticuloDetalle" Multiplicity="*" />
+          <End Type="BlockBusterDBModel.tblRating" Role="tblRating" Multiplicity="1" />
+          <End Type="BlockBusterDBModel.tblArticuloDetalle" Role="tblArticuloDetalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblRating">
               <PropertyRef Name="idRating" />
@@ -409,9 +491,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__tblArticu__idTra__5070F446">
+          <End Type="BlockBusterDBModel.tblTransaccion" Role="tblTransaccion" Multiplicity="1" />
+          <End Type="BlockBusterDBModel.tblArticuloTransaccion" Role="tblArticuloTransaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTransaccion">
+              <PropertyRef Name="idTransaccion" />
+            </Principal>
+            <Dependent Role="tblArticuloTransaccion">
+              <PropertyRef Name="idTransaccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__tblTransa__idEst__4BAC3F29">
-          <End Role="tblEstado" Type="Self.tblEstado" Multiplicity="0..1" />
-          <End Role="tblTransaccion" Type="Self.tblTransaccion" Multiplicity="*" />
+          <End Type="BlockBusterDBModel.tblEstado" Role="tblEstado" Multiplicity="0..1" />
+          <End Type="BlockBusterDBModel.tblTransaccion" Role="tblTransaccion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblEstado">
               <PropertyRef Name="idEstado" />
@@ -422,8 +516,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblTransa__idTip__4AB81AF0">
-          <End Role="tblTipo" Type="Self.tblTipo" Multiplicity="1" />
-          <End Role="tblTransaccion" Type="Self.tblTransaccion" Multiplicity="*" />
+          <End Type="BlockBusterDBModel.tblTipo" Role="tblTipo" Multiplicity="1" />
+          <End Type="BlockBusterDBModel.tblTransaccion" Role="tblTransaccion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblTipo">
               <PropertyRef Name="idTipo" />
@@ -434,8 +528,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblUsuari__idTip__46E78A0C">
-          <End Role="tblTipo" Type="Self.tblTipo" Multiplicity="1" />
-          <End Role="tblUsuario" Type="Self.tblUsuario" Multiplicity="*" />
+          <End Type="BlockBusterDBModel.tblTipo" Role="tblTipo" Multiplicity="1" />
+          <End Type="BlockBusterDBModel.tblUsuario" Role="tblUsuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblTipo">
               <PropertyRef Name="idTipo" />
@@ -446,8 +540,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblTransa__idUsu__4CA06362">
-          <End Role="tblUsuario" Type="Self.tblUsuario" Multiplicity="1" />
-          <End Role="tblTransaccion" Type="Self.tblTransaccion" Multiplicity="*" />
+          <End Type="BlockBusterDBModel.tblUsuario" Role="tblUsuario" Multiplicity="1" />
+          <End Type="BlockBusterDBModel.tblTransaccion" Role="tblTransaccion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblUsuario">
               <PropertyRef Name="idUsuario" />
@@ -457,53 +551,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BlockBusterDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tblArticulo" EntityType="Self.tblArticulo" />
-          <EntitySet Name="tblArticuloDetalle" EntityType="Self.tblArticuloDetalle" />
-          <EntitySet Name="tblEstado" EntityType="Self.tblEstado" />
-          <EntitySet Name="tblGenero" EntityType="Self.tblGenero" />
-          <EntitySet Name="tblRating" EntityType="Self.tblRating" />
-          <EntitySet Name="tblTipo" EntityType="Self.tblTipo" />
-          <EntitySet Name="tblTransaccion" EntityType="Self.tblTransaccion" />
-          <EntitySet Name="tblUsuario" EntityType="Self.tblUsuario" />
-          <AssociationSet Name="FK__tblArticu__idArt__4222D4EF" Association="Self.FK__tblArticu__idArt__4222D4EF">
-            <End Role="tblArticuloDetalle" EntitySet="tblArticuloDetalle" />
-            <End Role="tblArticulo" EntitySet="tblArticulo" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblArticu__idGen__440B1D61" Association="Self.FK__tblArticu__idGen__440B1D61">
-            <End Role="tblGenero" EntitySet="tblGenero" />
-            <End Role="tblArticulo" EntitySet="tblArticulo" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblArticu__idTip__4316F928" Association="Self.FK__tblArticu__idTip__4316F928">
-            <End Role="tblTipo" EntitySet="tblTipo" />
-            <End Role="tblArticulo" EntitySet="tblArticulo" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblTransa__idArt__4D94879B" Association="Self.FK__tblTransa__idArt__4D94879B">
-            <End Role="tblArticulo" EntitySet="tblArticulo" />
-            <End Role="tblTransaccion" EntitySet="tblTransaccion" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblArticu__idRat__3F466844" Association="Self.FK__tblArticu__idRat__3F466844">
-            <End Role="tblRating" EntitySet="tblRating" />
-            <End Role="tblArticuloDetalle" EntitySet="tblArticuloDetalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblTransa__idEst__4BAC3F29" Association="Self.FK__tblTransa__idEst__4BAC3F29">
-            <End Role="tblEstado" EntitySet="tblEstado" />
-            <End Role="tblTransaccion" EntitySet="tblTransaccion" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblTransa__idTip__4AB81AF0" Association="Self.FK__tblTransa__idTip__4AB81AF0">
-            <End Role="tblTipo" EntitySet="tblTipo" />
-            <End Role="tblTransaccion" EntitySet="tblTransaccion" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblUsuari__idTip__46E78A0C" Association="Self.FK__tblUsuari__idTip__46E78A0C">
-            <End Role="tblTipo" EntitySet="tblTipo" />
-            <End Role="tblUsuario" EntitySet="tblUsuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblTransa__idUsu__4CA06362" Association="Self.FK__tblTransa__idUsu__4CA06362">
-            <End Role="tblUsuario" EntitySet="tblUsuario" />
-            <End Role="tblTransaccion" EntitySet="tblTransaccion" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -513,91 +561,98 @@
             <EntityTypeMapping TypeName="BlockBusterDBModel.tblArticulo">
               <MappingFragment StoreEntitySet="tblArticulo">
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
-                <ScalarProperty Name="idArticuloDetalle" ColumnName="idArticuloDetalle" />
-                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
-                <ScalarProperty Name="idGenero" ColumnName="idGenero" />
-                <ScalarProperty Name="Miniatura" ColumnName="Miniatura" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
-                <ScalarProperty Name="Temporadas" ColumnName="Temporadas" />
                 <ScalarProperty Name="Episodios" ColumnName="Episodios" />
+                <ScalarProperty Name="Temporadas" ColumnName="Temporadas" />
+                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Miniatura" ColumnName="Miniatura" />
+                <ScalarProperty Name="idGenero" ColumnName="idGenero" />
+                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
+                <ScalarProperty Name="idArticuloDetalle" ColumnName="idArticuloDetalle" />
+                <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblArticuloDetalle">
             <EntityTypeMapping TypeName="BlockBusterDBModel.tblArticuloDetalle">
               <MappingFragment StoreEntitySet="tblArticuloDetalle">
-                <ScalarProperty Name="idArticuloDetalle" ColumnName="idArticuloDetalle" />
-                <ScalarProperty Name="idRating" ColumnName="idRating" />
-                <ScalarProperty Name="Productor" ColumnName="Productor" />
-                <ScalarProperty Name="Director" ColumnName="Director" />
-                <ScalarProperty Name="Estudio" ColumnName="Estudio" />
-                <ScalarProperty Name="Formato" ColumnName="Formato" />
-                <ScalarProperty Name="Idioma" ColumnName="Idioma" />
-                <ScalarProperty Name="Subtitulos" ColumnName="Subtitulos" />
-                <ScalarProperty Name="Nota" ColumnName="Nota" />
                 <ScalarProperty Name="Año" ColumnName="Año" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+                <ScalarProperty Name="Subtitulos" ColumnName="Subtitulos" />
+                <ScalarProperty Name="Idioma" ColumnName="Idioma" />
+                <ScalarProperty Name="Formato" ColumnName="Formato" />
+                <ScalarProperty Name="Estudio" ColumnName="Estudio" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="Productor" ColumnName="Productor" />
+                <ScalarProperty Name="idRating" ColumnName="idRating" />
+                <ScalarProperty Name="idArticuloDetalle" ColumnName="idArticuloDetalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblArticuloTransaccion">
+            <EntityTypeMapping TypeName="BlockBusterDBModel.tblArticuloTransaccion">
+              <MappingFragment StoreEntitySet="tblArticuloTransaccion">
+                <ScalarProperty Name="idTransaccion" ColumnName="idTransaccion" />
+                <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+                <ScalarProperty Name="idArticuloTransaccion" ColumnName="idArticuloTransaccion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblEstado">
             <EntityTypeMapping TypeName="BlockBusterDBModel.tblEstado">
               <MappingFragment StoreEntitySet="tblEstado">
-                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblGenero">
             <EntityTypeMapping TypeName="BlockBusterDBModel.tblGenero">
               <MappingFragment StoreEntitySet="tblGenero">
-                <ScalarProperty Name="idGenero" ColumnName="idGenero" />
                 <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="idGenero" ColumnName="idGenero" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblRating">
             <EntityTypeMapping TypeName="BlockBusterDBModel.tblRating">
               <MappingFragment StoreEntitySet="tblRating">
-                <ScalarProperty Name="idRating" ColumnName="idRating" />
                 <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="idRating" ColumnName="idRating" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblTipo">
             <EntityTypeMapping TypeName="BlockBusterDBModel.tblTipo">
               <MappingFragment StoreEntitySet="tblTipo">
-                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="TipoTipo" ColumnName="TipoTipo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblTransaccion">
             <EntityTypeMapping TypeName="BlockBusterDBModel.tblTransaccion">
               <MappingFragment StoreEntitySet="tblTransaccion">
-                <ScalarProperty Name="idTransaccion" ColumnName="idTransaccion" />
-                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
-                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
+                <ScalarProperty Name="idTransaccion" ColumnName="idTransaccion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblUsuario">
             <EntityTypeMapping TypeName="BlockBusterDBModel.tblUsuario">
               <MappingFragment StoreEntitySet="tblUsuario">
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
-                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
-                <ScalarProperty Name="Correo" ColumnName="Correo" />
-                <ScalarProperty Name="PasswordUsuario" ColumnName="PasswordUsuario" />
                 <ScalarProperty Name="CreadoEn" ColumnName="CreadoEn" />
+                <ScalarProperty Name="PasswordUsuario" ColumnName="PasswordUsuario" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

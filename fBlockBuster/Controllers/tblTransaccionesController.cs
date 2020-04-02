@@ -18,7 +18,7 @@ namespace fBlockBuster.Controllers
         // GET: tblTransacciones
         public ActionResult Index()
         {
-            var tblTransaccion = db.tblTransaccion.Include(t => t.tblArticulo).Include(t => t.tblEstado).Include(t => t.tblTipo).Include(t => t.tblUsuario);
+            var tblTransaccion = db.tblTransaccion./*Include(t => t.tblArticulo).*/Include(t => t.tblEstado).Include(t => t.tblTipo).Include(t => t.tblUsuario);
             return View(tblTransaccion.ToList());
         }
 
@@ -40,7 +40,7 @@ namespace fBlockBuster.Controllers
         // GET: tblTransacciones/Create
         public ActionResult Create()
         {
-            ViewBag.idArticulo = new SelectList(db.tblArticulo, "idArticulo", "Miniatura");
+            //ViewBag.idArticulo = new SelectList(db.tblArticulo, "idArticulo", "Miniatura");
             ViewBag.idEstado = new SelectList(db.tblEstado, "idEstado", "Estado");
             ViewBag.idTipo = new SelectList(db.tblTipo, "idTipo", "Descripcion");
             ViewBag.idUsuario = new SelectList(db.tblUsuario, "idUsuario", "NombreUsuario");
@@ -52,23 +52,22 @@ namespace fBlockBuster.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idTransaccion,idTipo,idEstado,idUsuario,idArticulo,Precio,Duracion,Fecha")] tblTransaccion tblTransaccion)
+        public ActionResult Create([Bind(Include = "idTransaccion,idTipo,idEstado,idUsuario,Precio,Fecha")] tblTransaccion tblTransaccion)
         {
             if (ModelState.IsValid)
             {
-                db.Database.ExecuteSqlCommand("INSERT into tblTransaccion VALUES(@idTipo,@idEstado,@idUsuario,@idArticulo,@Precio,@Duracion,@Fecha)",
+                db.Database.ExecuteSqlCommand("INSERT into tblTransaccion VALUES(@idTipo,@idEstado,@idUsuario,@Precio,@Fecha)",
                     new SqlParameter("idTipo", tblTransaccion.idTipo),
                     new SqlParameter("idEstado", tblTransaccion.idEstado),
                     new SqlParameter("idUsuario", tblTransaccion.idUsuario),
-                    new SqlParameter("idArticulo", tblTransaccion.idArticulo),
+                    //new SqlParameter("idArticulo", tblTransaccion.idArticulo),
                     new SqlParameter("Precio", tblTransaccion.Precio),
-                    new SqlParameter("Duracion", tblTransaccion.Duracion),
                     new SqlParameter("Fecha", tblTransaccion.Fecha)
                     );
                 return RedirectToAction("Index");
             }
 
-            ViewBag.idArticulo = new SelectList(db.tblArticulo, "idArticulo", "Miniatura", tblTransaccion.idArticulo);
+            //ViewBag.idArticulo = new SelectList(db.tblArticulo, "idArticulo", "Miniatura", tblTransaccion.idArticulo);
             ViewBag.idEstado = new SelectList(db.tblEstado, "idEstado", "Estado", tblTransaccion.idEstado);
             ViewBag.idTipo = new SelectList(db.tblTipo, "idTipo", "Descripcion", tblTransaccion.idTipo);
             ViewBag.idUsuario = new SelectList(db.tblUsuario, "idUsuario", "NombreUsuario", tblTransaccion.idUsuario);
@@ -87,7 +86,7 @@ namespace fBlockBuster.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.idArticulo = new SelectList(db.tblArticulo, "idArticulo", "Miniatura", tblTransaccion.idArticulo);
+            //ViewBag.idArticulo = new SelectList(db.tblArticulo, "idArticulo", "Miniatura", tblTransaccion.idArticulo);
             ViewBag.idEstado = new SelectList(db.tblEstado, "idEstado", "Estado", tblTransaccion.idEstado);
             ViewBag.idTipo = new SelectList(db.tblTipo, "idTipo", "Descripcion", tblTransaccion.idTipo);
             ViewBag.idUsuario = new SelectList(db.tblUsuario, "idUsuario", "NombreUsuario", tblTransaccion.idUsuario);
@@ -99,18 +98,16 @@ namespace fBlockBuster.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idTransaccion,idTipo,idEstado,idUsuario,idArticulo,Precio,Duracion,Fecha")] tblTransaccion tblTransaccion)
+        public ActionResult Edit([Bind(Include = "idTransaccion,idTipo,idEstado,idUsuario,Precio,Fecha")] tblTransaccion tblTransaccion)
         {
             if (ModelState.IsValid)
             {
                 db.Database.ExecuteSqlCommand("UPDATE tblTransaccion " +
-                    "set idTransaccion = @idTransaccion, " +
-                    "idTipo = @idTipo, " +
+                    "set idTipo = @idTipo, " +
                     "idEstado = @idEstado, " +
                     "idUsuario = @idUsuario, " +
-                    "idArticulo = @idArticulo, " +
+                    //"idArticulo = @idArticulo, " +
                     "Precio = @Precio, " +
-                    "Duracion = @Duracion, " +
                     "Fecha = @Fecha " +
                     "where idTransaccion = @idTransaccion",
 
@@ -118,16 +115,15 @@ namespace fBlockBuster.Controllers
                 new SqlParameter("idTipo", tblTransaccion.idTipo),
                 new SqlParameter("idEstado", tblTransaccion.idEstado),
                 new SqlParameter("idUsuario", tblTransaccion.idUsuario),
-                new SqlParameter("idArticulo", tblTransaccion.idArticulo),
+                //new SqlParameter("idArticulo", tblTransaccion.idArticulo),
                 new SqlParameter("Precio", tblTransaccion.Precio),
-                new SqlParameter("Duracion", tblTransaccion.Duracion),
                 new SqlParameter("Fecha", tblTransaccion.Fecha)
 
                 );
 
                 return RedirectToAction("Index");
             }
-            ViewBag.idArticulo = new SelectList(db.tblArticulo, "idArticulo", "Miniatura", tblTransaccion.idArticulo);
+            //ViewBag.idArticulo = new SelectList(db.tblArticulo, "idArticulo", "Miniatura", tblTransaccion.idArticulo);
             ViewBag.idEstado = new SelectList(db.tblEstado, "idEstado", "Estado", tblTransaccion.idEstado);
             ViewBag.idTipo = new SelectList(db.tblTipo, "idTipo", "Descripcion", tblTransaccion.idTipo);
             ViewBag.idUsuario = new SelectList(db.tblUsuario, "idUsuario", "NombreUsuario", tblTransaccion.idUsuario);

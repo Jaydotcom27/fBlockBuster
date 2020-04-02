@@ -33,6 +33,58 @@ namespace fBlockBuster.Controllers
 
         }
 
+        public ActionResult Agregar(int? id)
+        {
+            var tblArticulo = db.tblArticulo.Include(t => t.tblArticuloDetalle).Include(t => t.tblGenero).Include(t => t.tblTipo);
+
+            int sidUsuario = Convert.ToInt32(Session["usuarioSes"]);
+            string ConnectionString = "Integrated Security = True; " +
+            "Initial Catalog= BlockBusterDB; " + " Data source = JAYDESK; ";
+            string SQL = " select * from tblTransaccion where idUsuario = '" + sidUsuario + "'  and idEstado = 1;";
+
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            SqlConnection conn2 = new SqlConnection(ConnectionString);
+
+            // Create a command object
+            SqlCommand cmd = new SqlCommand(SQL, conn);
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            bool hasTrans = false;
+
+            if (reader.Read())
+            {
+
+                hasTrans = true;
+            }
+            else
+            {
+                db.Database.ExecuteSqlCommand("INSERT into tblTransaccion VALUES(@idTipo,@idEstado,@idUsuario,@Precio,@Fecha)",
+                    new SqlParameter("idTipo", 5),
+                    new SqlParameter("idEstado", 1),
+                    new SqlParameter("idUsuario", sidUsuario),
+                    new SqlParameter("Precio", "0"),
+                    new SqlParameter("Fecha", DateTime.Now)
+                    );
+            }
+            conn.Close();
+
+            SqlCommand cmd2 = new SqlCommand(SQL, conn2);
+            conn2.Open();
+            SqlDataReader reader2 = cmd2.ExecuteReader();
+
+            if (reader2.Read())
+            {
+                int transaccionid = Convert.ToInt32(reader2.GetSqlInt32(reader2.GetOrdinal("idTransaccion")).Value);
+                db.Database.ExecuteSqlCommand("INSERT into tblArticuloTransaccion VALUES(@idArticulo,@idTransaccion)",
+                     new SqlParameter("idArticulo", id),
+                     new SqlParameter("idTransaccion", transaccionid)
+                     );
+            }
+            conn2.Close();
+            return View($"~/Views/Home/Index.cshtml");
+        }
+
         // GET: tblArticulos/Details/5
         public ActionResult Details(int? id)
         {

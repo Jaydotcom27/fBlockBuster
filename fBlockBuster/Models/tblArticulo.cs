@@ -17,7 +17,7 @@ namespace fBlockBuster.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tblArticulo()
         {
-            this.tblTransaccion = new HashSet<tblTransaccion>();
+            this.tblArticuloTransaccion = new HashSet<tblArticuloTransaccion>();
         }
     
         public int idArticulo { get; set; }
@@ -33,9 +33,9 @@ namespace fBlockBuster.Models
         public Nullable<decimal> Precio { get; set; }
     
         public virtual tblArticuloDetalle tblArticuloDetalle { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblArticuloTransaccion> tblArticuloTransaccion { get; set; }
         public virtual tblGenero tblGenero { get; set; }
         public virtual tblTipo tblTipo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblTransaccion> tblTransaccion { get; set; }
     }
 }
